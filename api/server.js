@@ -19,7 +19,15 @@ contactEmail.verify((error) => {
 
 
 
+
+
 module.exports = async (req, res) => {
+
+  res.setHeader('Access-Control-Allow-Origin', '*'); // Adjust this if you want to restrict origins
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+  
   if (req.method === 'POST') {
     const { firstName, lastName, email, message, phone } = req.body;
     const name = `${firstName} ${lastName}`;
