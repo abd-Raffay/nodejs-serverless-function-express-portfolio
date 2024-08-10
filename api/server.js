@@ -1,9 +1,9 @@
 const nodemailer = require("nodemailer");
 
-const cors = require("cors");
-app.use(cors());
-
-
+app.use((req, res, next) => {
+  res.header({"Access-Control-Allow-Origin": "*"});
+  next();
+}) 
 // Configure Nodemailer
 const contactEmail = nodemailer.createTransport({
   service: 'gmail',
