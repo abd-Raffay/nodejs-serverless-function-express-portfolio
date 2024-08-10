@@ -1,6 +1,7 @@
 const nodemailer = require("nodemailer");
 
-
+const cors = require("cors");
+app.use(cors());
 
 
 // Configure Nodemailer
@@ -19,6 +20,8 @@ contactEmail.verify((error) => {
     console.log("Ready to Send");
   }
 });
+
+
 
 
 
