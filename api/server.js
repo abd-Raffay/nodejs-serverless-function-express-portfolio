@@ -1,5 +1,15 @@
 const nodemailer = require("nodemailer");
 
+const corsOptions = {
+  origin: 'https://personal-portfolio-nine-drab.vercel.app', // Replace with your frontend URL
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type'],
+};
+
+app.use(cors(corsOptions));
+
+
+
 // Configure Nodemailer
 const contactEmail = nodemailer.createTransport({
   service: 'gmail',
@@ -27,7 +37,7 @@ module.exports = async (req, res) => {
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
-  
+
   if (req.method === 'POST') {
     const { firstName, lastName, email, message, phone } = req.body;
     const name = `${firstName} ${lastName}`;
