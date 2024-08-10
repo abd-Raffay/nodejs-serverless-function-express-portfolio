@@ -1,12 +1,5 @@
 const nodemailer = require("nodemailer");
 
-const corsOptions = {
-  origin: 'https://personal-portfolio-nine-drab.vercel.app', // Replace with your frontend URL
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type'],
-};
-
-app.use(cors(corsOptions));
 
 
 
@@ -32,10 +25,6 @@ contactEmail.verify((error) => {
 
 
 module.exports = async (req, res) => {
-
-  res.setHeader('Access-Control-Allow-Origin', '*'); // Adjust this if you want to restrict origins
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
 
   if (req.method === 'POST') {
