@@ -4,7 +4,12 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: 'https://personal-portfolio-nine-drab.vercel.app', // Specify your frontend domain
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', // Allowed methods
+  allowedHeaders: 'Content-Type,Authorization', // Allowed headers
+}));
+
 
 // Configure Nodemailer
 const contactEmail = nodemailer.createTransport({
