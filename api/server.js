@@ -39,7 +39,8 @@ module.exports = async (req, res) => {
     res.setHeader('Access-Control-Allow-Origin', 'https://personal-portfolio-nine-drab.vercel.app');
     res.setHeader('Access-Control-Allow-Methods', 'POST, GET, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-    res.status(200).end();
+    res.status(200).json({ status: "Message Sent", code: 200 });
+
     return;
   }
 
