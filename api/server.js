@@ -1,5 +1,10 @@
 const nodemailer = require("nodemailer");
 
+const express = require('express');
+const cors = require('cors');
+const app = express();
+
+app.use(cors());
 
 // Configure Nodemailer
 const contactEmail = nodemailer.createTransport({
