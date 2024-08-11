@@ -35,12 +35,15 @@ contactEmail.verify((error) => {
 
 module.exports = async (req, res) => {
   if (req.method === 'OPTIONS') {
-    // Handle preflight requests
+    // Handle preflight request
     res.setHeader('Access-Control-Allow-Origin', 'https://personal-portfolio-nine-drab.vercel.app');
     res.setHeader('Access-Control-Allow-Methods', 'POST, GET, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
     res.status(200).end();
-  } else if (req.method === 'POST') {
+    return;
+  }
+
+  if (req.method === 'POST') {
     // Handle POST request
     const { firstName, lastName, email, message, phone } = req.body;
     const name = `${firstName} ${lastName}`;
@@ -56,9 +59,10 @@ module.exports = async (req, res) => {
 
     try {
       await contactEmail.sendMail(mail);
+      res.setHeader('Access-Control-Allow-Origin', 'https://personal-portfolio-nine-drab.vercel.app');
       res.status(200).json({ status: "Message Sent" });
     } catch (error) {
-      console.error('Error sending email:', error);
+      res.setHeader('Access-Control-Allow-Origin', 'https://personal-portfolio-nine-drab.vercel.app');
       res.status(500).json({ error: 'Failed to send email. Please try again later.' });
     }
   } else {
@@ -66,3 +70,4 @@ module.exports = async (req, res) => {
     res.status(405).end(`Method ${req.method} Not Allowed`);
   }
 };
+
