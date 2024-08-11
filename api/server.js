@@ -57,15 +57,24 @@ module.exports = async (req, res) => {
              <p>Phone: ${phone}</p>
              <p>Message: ${message}</p>`,
     };
-  }
 
-    contactEmail.sendMail(mail, (error) => {
-      if (error) {
-        res.json(error);
-      } else {
-        res.json({ code: 200, status: "Message Sent" });
-      }
-    });
-  
+    try {
+      await contactEmail.sendMail(mail, (error) => {
+        if (error) {
+          res.json(error);
+        } else {
+          res.json({ code: 200, status: "Message Sent" });
+        }
+      });
+      res.setHeader('Access-Control-Allow-Origin', 'https://personal-portfolio-nine-drab.vercel.app');
+      res.status(200).json({ status: "Message Sent" });
+    } catch (error) {
+      res.setHeader('Access-Control-Allow-Origin', 'https://personal-portfolio-nine-drab.vercel.app');
+      res.status(500).json({ error: 'Failed to send email. Please try again later.' });
+    }
+  } else {
+    res.setHeader('Allow', ['POST', 'OPTIONS']);
+    res.status(405).end(`Method ${req.method} Not Allowed`);
+  }
 };
 
